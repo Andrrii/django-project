@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}
+
+    {{ news_item.title }}
+{% endblock %}
+{% block sidebar %}
+{% include "inc/_sidebar.html" %}
+{% endblock %}
+{% block content %}
+
+
+{% if news_item %}
+            <div class="card mb-3">
+                <h5 class="card-header">
+
+                    Категорія: <a href="{{ news_item.category.get_absolute_url }}"> {{ news_item.category }}</a> </h5>
+                    <div class="card-body">
+
+                            {% if news_item.photo %}
+                            <img src="{{ news_item.photo.url }}" alt="" width="400" class="float-left mr-3">
+                                {% else %}
+                                <img src="https://amaltasindia.in/UploadPhoto/no_img.jpg" alt = ''
+                                     width="400" class="float-left mr-3">
+                            {% endif %}
+
+                                <h5 class="card-title">{{ news_item.title }}</h5>
+                                <p class="card-text">{{ news_item.content|safe|linebreaks }}</p>
+
+
+
+
+                    </div>
+            <div class="card-footer text-muted">
+        <div>
+                        <div style="width: 300px;  float:left;">{{ news_item.created_at |timesince }} назад</div>
+                        <div style="width: 300px;  float:right;">{{ news_item.created_at |date:"Y-m-d H:i" }}</div>
+                        </div>
+                    </div>
+                    </div>
+            {% else %}
+                <li>Вибачте,але дана сторінка ще не заповнена </li>
+            {% endif %}
+
+{% endblock %}
+
+
+
+
+

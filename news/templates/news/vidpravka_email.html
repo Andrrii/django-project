@@ -1,0 +1,33 @@
+
+{% extends 'base.html' %}
+
+
+{% block title %}
+
+    Зворотній зв'язок
+{% endblock %}
+{% block sidebar %}
+
+{% endblock %}
+{% block content %}
+    <h2>Зворотній зв'язок</h2>
+    <p></p>
+
+
+<form method="post">
+
+{% csrf_token %}
+{{ form.as_p }}
+  <script src='https://www.google.com/recaptcha/api.js'></script>
+   <div class="form-group g-recaptcha" data-sitekey="6LeK9McZAAAAAAF8S1doJkD9zrivzwUkkO5nUd4V"></div>
+
+
+
+    <button type="submit" class="btn btn-primary btn-block">Відправити</button>
+
+</form>
+
+
+{% block number %}{% endblock %}
+{% endblock %}
+<script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>

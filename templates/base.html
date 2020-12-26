@@ -1,0 +1,97 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+   <!-- <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- errorlist сайту -->
+
+    <title>{% block title %}News{% endblock %}</title>
+  </head>
+  <body>
+    {% include 'inc/_nav.html' %}
+
+    <div class="container mt-3">
+        <h1> {{ title }}  </h1>
+        <div class="row">
+        <div class="col-md-2">
+      <!--  {% load cache %} -->
+        {% comment %}
+        {% cache 60 sidebar %}
+        {% endcomment %}
+        {% block sidebar %}sidebar{% endblock %}
+        {% comment %}
+      <!--  {% endcache %} -->
+      {% endcomment %}
+        </div>
+        <div class="col-md-10">
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'error' %}
+                    <div class="alert alert-danger" role="alert">
+                        {{message}}
+                    </div>
+                {% else %}
+                    <div class="alert alert-{{ message.tags }}" role="alert">
+                      {{ message }}
+                    </div>
+                {% endif %}
+
+
+            {% endfor %}
+        {% endif %}
+        {% block content %}content...{% endblock %}
+        </div>
+        </div>
+      {% block number %}  <p>Всього дописів:
+
+            {{ countb }}
+
+          </p>
+    <nav aria-label="Page navigation example">
+  <ul class="pagination">
+
+   {% if page_obj.has_other_pages %}
+     {% if page_obj.has_previous %}
+           <li class="page-item ">
+          <a class="page-link" href="?page={{  page_obj.previous_page_number }}" tabindex="-1" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+          {% endif %}
+      {% for p in page_obj.paginator.page_range %}
+
+          {% if page_obj.number == p %}
+    <li class="page-item active " aria-current="page"><a class="page-link" href="?page={{ p }}">{{ p }}
+    <span class="sr-only">(current)</span></a></li>
+          {% elif p > page_obj.number|add:-2 and  p < page_obj.number|add:2 %}
+                  <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+
+          {% endif %}
+
+{% endfor %}
+
+ {% if page_obj.has_next %}
+              <li class="page-item">
+      <a class="page-link" href="?page={{   page_obj.next_page_number}}" tabindex="+1" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+          {% endif %}
+  {% endif %}
+  </ul>
+</nav> {% endblock %}
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

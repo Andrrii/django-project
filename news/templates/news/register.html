@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}
+
+    Registration
+{% endblock %}
+{% block sidebar %}{% endblock %}
+{% block content %}
+<style>
+.seredina{
+    margin-left: 5px;
+}
+</style>
+<h2>Registration</h2>
+<p></p>
+    <div class="seredina">
+<form method="post" >
+{% csrf_token %}
+{{ form.as_p }}
+    <button type="submit" class="btn btn-primary btn-block">Register</button>
+</form>
+    </div>
+{% block number %}{% endblock %}
+{% endblock %}
+
+

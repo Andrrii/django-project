@@ -1,0 +1,15 @@
+{% load news_tags %}
+              <!--  <div class="list-group">
+                {% get_categories as categories %}
+                {% for item_c in categories %}
+
+                  <a href="{% url 'category' item_c.pk %}" class="list-group-item list-group-item-action">{{ item_c.title}}</a>
+
+                {% endfor %}
+                </div>
+
+<br> -->
+{% show_categories %} <!-- Той самий результат шо і зверху,але зроблено через функцію
+                              і звязано з  list_categories.html
+
+ -->

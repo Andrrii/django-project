@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}
+
+    Пропозиція новин
+{% endblock %}
+{% block sidebar %}
+
+{% endblock %}
+{% block content %}
+
+<h1>Пропозиція новин</h1>
+<p></p>
+<form action="{% url 'offer_news' %}" method="post">
+{% csrf_token %}
+
+{{ form.as_p }} <!--  Правильна генерація форм на cайті
+                        Ті варіанти шо нижче не очень,але +- робочі
+ -->
+
+    {% comment %}
+    {{ form.non_field_errors }}
+     <div class="form-group">
+    <label for="{{ form.title.id_for_label }}">Заголовок:  </label>
+         {{ form.title }}
+         <div class="invalid-feedback">
+             {{ form.title.errors }}
+         </div>
+     </div>
+    <div class="form-group">
+    <label for="{{ form.content.id_for_label }}">Текст:  </label>
+         {{ form.content }}
+         <div class="invalid-feedback">
+             {{ form.content.errors }}
+         </div>
+     </div>
+    {% endcomment %}
+    {% comment %}
+     <div class="form-group">
+    <label for="{{ form.is_published.id_for_label }}">Опобліковувати ? :  </label>
+         {{ form.is_published }}
+         <div class="invalid-feedback">
+             {{ form.is_published.errors }}
+         </div>
+     </div>
+     {% endcomment %}
+    {% comment %}
+        <div class="form-group">
+    <label for="{{ form.category.id_for_label }}">Категорія:  </label>
+         {{ form.category }}
+         <div class="invalid-feedback">
+             {{ form.category.errors }}
+         </div>
+     </div>
+{% endcomment %}
+<button type="submit" class="btn btn-primary btn-block">
+Запропонувати
+</button>
+
+</form>
+{% block number %}{% endblock %}
+{% endblock %}
+
+
+
+

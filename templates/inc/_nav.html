@@ -1,0 +1,56 @@
+
+<style>
+    .otstup{
+        margin-right: 25px;
+    }
+
+</style>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'home' %}"><img src="https://res.cloudinary.com/practicaldev/image/fetch/s--ELyLkB2V--/c_imagga_scale,f_auto,fl_progressive,h_1080,q_auto,w_1080/https://dev-to-uploads.s3.amazonaws.com/i/qs6fdnocgr90669hdi1a.jpg" alt="Logo" width='50' ></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Головна</a></li>
+        {% if request.user.is_authenticated %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'offer_news' %}">Запропонувати новину</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'vidpravka_email' %}">Зворотній зв'язок</a></li>
+
+        {% endif %}
+    </ul>
+  <div class="otstup">
+   <span class="navbar-text">
+             {% if request.user.is_authenticated %}
+                Hello) {{ user.username }} | <a href="{% url 'logout' %}">Log out</a>
+             {% else %}
+                 <a href="{% url 'register' %}">Register</a> | <a href="{% url 'login' %}">Sign in</a>
+
+             {% endif %}
+            </span>  </div>  <div   >
+      {% now "H:i" %}
+     </div>
+
+<!--
+            <script type="text/javascript">
+            setInterval(function () {
+             date = new Date(),       Годинник зправа зверху
+             h = date.getHours(),
+             m = date.getMinutes(),
+             s = date.getSeconds(),
+             h = (h < 10) ? '0' + h : h,
+             m = (m < 10) ? '0' + m : m,
+             s = (s < 10) ? '0' + s : s,
+             document.getElementById('time').innerHTML = h + ':' + m + ':' + s;
+            }, 1000);
+            </script>
+
+            <span style="color:#313131; font-size:14pt;float:right; border:2px solid #e3e3e3; background:#f8f9fa; padding:5px;">
+            <span id="time"></span>
+            </span> -->
+
+
+  </div>
+</nav>
